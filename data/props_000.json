@@ -1,0 +1,299 @@
+[
+  {
+    "file": "prop_000_00.png",
+    "anchorRow": 13,
+    "anchorCol": 2,
+    "anchorH": 2,
+    "widthPx": 52,
+    "heightPx": 51,
+    "padPx": 2,
+    "anchorOffsetXPx": 26.0,
+    "anchorOffsetYPx": 48,
+    "anchorDistPx": 8.54,
+    "srcBBox": [
+      48,
+      321,
+      95,
+      367
+    ],
+    "cropBBox": [
+      46,
+      319,
+      98,
+      370
+    ],
+    "clampCells": [
+      [
+        13,
+        1,
+        2
+      ],
+      [
+        13,
+        2,
+        2
+      ]
+    ]
+  },
+  {
+    "file": "prop_000_01.png",
+    "anchorRow": 1,
+    "anchorCol": 11,
+    "anchorH": 2,
+    "widthPx": 52,
+    "heightPx": 51,
+    "padPx": 2,
+    "anchorOffsetXPx": 26.0,
+    "anchorOffsetYPx": 48,
+    "anchorDistPx": 9.43,
+    "srcBBox": [
+      400,
+      289,
+      447,
+      335
+    ],
+    "cropBBox": [
+      398,
+      287,
+      450,
+      338
+    ]
+  },
+  {
+    "file": "prop_000_02.png",
+    "clampCells": [[12, 13, 2]],
+    "anchorRow": 13,
+    "anchorCol": 13,
+    "anchorH": 2,
+    "widthPx": 28,
+    "heightPx": 50,
+    "padPx": 2,
+    "anchorOffsetXPx": 14.0,
+    "anchorOffsetYPx": 47,
+    "anchorDistPx": 17.72,
+    "srcBBox": [
+      261,
+      402,
+      284,
+      447
+    ],
+    "cropBBox": [
+      259,
+      400,
+      287,
+      450
+    ],
+    "orient": 0
+  },
+  {
+    "file": "prop_000_03.png",
+    "anchorRow": 8,
+    "anchorCol": 0,
+    "anchorH": 9,
+    "widthPx": 36,
+    "heightPx": 34,
+    "padPx": 2,
+    "anchorOffsetXPx": 18.0,
+    "anchorOffsetYPx": 31,
+    "anchorDistPx": 5.0,
+    "srcBBox": [
+      112,
+      242,
+      143,
+      271
+    ],
+    "cropBBox": [
+      110,
+      240,
+      146,
+      274
+    ],
+    "orient": 1
+  },
+  {
+    "file": "prop_000_04.png",
+    "anchorRow": 4,
+    "anchorCol": 13,
+    "anchorH": 2,
+    "widthPx": 44,
+    "heightPx": 32,
+    "padPx": 2,
+    "anchorOffsetXPx": 22.0,
+    "anchorOffsetYPx": 29,
+    "anchorDistPx": 9.49,
+    "srcBBox": [
+      389,
+      356,
+      428,
+      383
+    ],
+    "cropBBox": [
+      387,
+      354,
+      431,
+      386
+    ],
+    "orient": 1,
+    "clampCells": [
+      [
+        3,
+        13,
+        2
+      ],
+      [
+        4,
+        13,
+        2
+      ]
+    ]
+  },
+  {
+    "file": "prop_000_05.png",
+    "anchorRow": 13,
+    "anchorCol": 8,
+    "anchorH": 2,
+    "widthPx": 42,
+    "heightPx": 32,
+    "padPx": 2,
+    "anchorOffsetXPx": 21.0,
+    "anchorOffsetYPx": 29,
+    "anchorDistPx": 8.54,
+    "srcBBox": [
+      149,
+      388,
+      186,
+      415
+    ],
+    "cropBBox": [
+      147,
+      386,
+      189,
+      418
+    ],
+    "orient": 0,
+    "clampCells": [
+      [
+        13,
+        7,
+        2
+      ],
+      [
+        13,
+        8,
+        2
+      ]
+    ]
+  },
+  {
+    "file": "prop_000_06.png",
+    "anchorRow": 6,
+    "anchorCol": 0,
+    "anchorH": 9,
+    "widthPx": 36,
+    "heightPx": 34,
+    "padPx": 2,
+    "anchorOffsetXPx": 18.0,
+    "anchorOffsetYPx": 31,
+    "anchorDistPx": 5.0,
+    "srcBBox": [
+      144,
+      226,
+      175,
+      255
+    ],
+    "cropBBox": [
+      142,
+      224,
+      178,
+      258
+    ],
+    "orient": 1
+  },
+  {
+    "file": "prop_000_07.png",
+    "anchorRow": 1,
+    "anchorCol": 5,
+    "anchorH": 2,
+    "widthPx": 36,
+    "heightPx": 33,
+    "padPx": 2,
+    "anchorOffsetXPx": 18.0,
+    "anchorOffsetYPx": 30,
+    "anchorDistPx": 3.0,
+    "srcBBox": [
+      304,
+      267,
+      335,
+      295
+    ],
+    "cropBBox": [
+      302,
+      265,
+      338,
+      298
+    ],
+    "clampCells": [
+      [
+        1,
+        5,
+        2
+      ]
+    ]
+  },
+  {
+    "file": "prop_000_08.png",
+    "anchorRow": 0,
+    "anchorCol": 2,
+    "anchorH": 11,
+    "widthPx": 21,
+    "heightPx": 36,
+    "padPx": 2,
+    "anchorOffsetXPx": 10.5,
+    "anchorOffsetYPx": 33,
+    "anchorDistPx": 1.12,
+    "srcBBox": [
+      280,
+      176,
+      296,
+      207
+    ],
+    "cropBBox": [
+      278,
+      174,
+      299,
+      210
+    ]
+  },
+  {
+    "file": "prop_000_09.png",
+    "anchorRow": 7,
+    "anchorCol": 13,
+    "anchorH": 2,
+    "widthPx": 28,
+    "heightPx": 24,
+    "padPx": 2,
+    "anchorOffsetXPx": 14.0,
+    "anchorOffsetYPx": 21,
+    "anchorDistPx": 3.16,
+    "srcBBox": [
+      341,
+      388,
+      364,
+      407
+    ],
+    "cropBBox": [
+      339,
+      386,
+      367,
+      410
+    ],
+    "orient": 1,
+    "clampCells": [
+      [
+        7,
+        13,
+        2
+      ]
+    ]
+  }
+]
