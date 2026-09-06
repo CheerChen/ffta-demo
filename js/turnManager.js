@@ -27,6 +27,7 @@ import {
   updateStatusCard, hideStatusCard,
   showActionMenuNear, hideActionMenu, refreshActionMenuFloat,
 } from "./statusCard.js";
+import { t } from "../shared/i18n.js";
 
 // --- State ---
 let activeUnit = null;     // unit whose turn it is right now
@@ -60,7 +61,7 @@ export function resetTurnManager() {
 function advanceToNextTurn() {
   const actor = nextActor(UNITS);
   if (!actor) {
-    document.getElementById("info").textContent = "没有单位可以行动。";
+    document.getElementById("info").textContent = t("info.no_units");
     return;
   }
   startTurn(actor);
@@ -85,7 +86,7 @@ function startTurn(unit) {
     const bfs = bfsWithPath(unit);
     setReachable(bfs.visited);
     document.getElementById("info").textContent =
-      `${unit.name} 的回合 — 选择行动。`;
+      t("turn.player", { name: unit.name });
     updateStatusCard(unit);
     showActionMenuNear(unit, false, false);
     render();
@@ -95,7 +96,7 @@ function startTurn(unit) {
     setSelectedUnit(unit);
     setReachable(new Map());
     document.getElementById("info").textContent =
-      `${unit.name} (敌方) 回合 — AI 思考中…`;
+      t("turn.enemy", { name: unit.name });
     updateStatusCard(unit);
     render();
 
@@ -173,12 +174,12 @@ function showBattleEnd(result) {
   const title = document.getElementById("battle-end-title");
   const subtitle = document.getElementById("battle-end-subtitle");
   if (result === "player") {
-    if (title) title.textContent = "胜利！";
-    if (subtitle) subtitle.textContent = "敌方全灭。";
+    if (title) title.textContent = t("end.victory");
+    if (subtitle) subtitle.textContent = t("end.victory_sub");
     if (title) title.style.color = "#5a9dff";
   } else {
-    if (title) title.textContent = "败北…";
-    if (subtitle) subtitle.textContent = "玩家方全灭。";
+    if (title) title.textContent = t("end.defeat");
+    if (subtitle) subtitle.textContent = t("end.defeat_sub");
     if (title) title.style.color = "#e0556a";
   }
   overlay.style.display = "flex";
@@ -205,7 +206,7 @@ export function markActed() { turnActed = true; }
 export function hasMoved() { return turnMoved; }
 export function hasActed() { return turnActed; }
 
-/** Player explicitly ends turn via the "等待" button. */
+/** Player explicitly ends turn via the "Wait" button. */
 export function playerEndTurn() {
   if (!isPlayerTurn()) return;
   finishTurn(turnMoved, turnActed);
@@ -229,8 +230,8 @@ function updateTurnOrderBar() {
     const q = queue[i];
     const c = colors[q.unit] || "#aaa";
     const marker = i === 0 ? "▶" : " ";
-    const tickLabel = q.tick === 0 ? "现在" : `+${q.tick}`;
+    const tickLabel = q.tick === 0 ? t("bar.now") : `+${q.tick}`;
     html += `<div style="color:${c};">${marker} ${q.unit.padEnd(8)} <span style="color:#556677;">${tickLabel}</span></div>`;
   }
-  el.innerHTML = html || "<span style='color:#556677;'>等待中…</span>";
+  el.innerHTML = html || `<span style='color:#556677;'>${t("bar.waiting")}</span>`;
 }

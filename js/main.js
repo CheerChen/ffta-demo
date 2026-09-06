@@ -20,8 +20,10 @@ import { updateProjectiles } from "./projectile.js";
 import { updatePopups } from "./fx.js";
 import { buildClouds, updateClouds } from "./clouds.js";
 import { initPerfMonitor, updatePerfMonitor } from "./perfMonitor.js";
+import { t, applyDom } from "../shared/i18n.js";
 
 async function init() {
+  applyDom();
   const canvas = document.getElementById("board");
   initScene(canvas);
   const scene = getScene();
@@ -43,7 +45,7 @@ async function init() {
   resizeRenderer();
 
   // Load sprites, then build unit meshes
-  document.getElementById("info").textContent = "加载精灵中…";
+  document.getElementById("info").textContent = t("info.loading_sprites");
   await loadAllSprites();
   resolveFallbacks();
   buildUnitSprites(scene);
@@ -56,7 +58,7 @@ async function init() {
   initTurnManager();
   initPerfMonitor();
 
-  document.getElementById("info").textContent = "就绪 — Q/E 旋转视角，B 切换贴图/白模型";
+  document.getElementById("info").textContent = t("info.ready");
 
   function toggleTextures() {
     setBgEnabled(!isBgEnabled());
@@ -65,8 +67,8 @@ async function init() {
     buildTerrain(getScene());
     invalidatePickCandidates();
     document.getElementById("info").textContent = isBgEnabled()
-      ? "立体学校：墙面、屋顶和烟囱的贴图随模型旋转。"
-      : "学校白模型与地图地形（B 切回贴图）。";
+      ? t("info.school_tex")
+      : t("info.school_white");
   }
 
   window.addEventListener("keydown", (e) => {
@@ -115,5 +117,5 @@ init().then(() => {
   requestAnimationFrame(loop);
 }).catch(err => {
   console.error("Init failed:", err);
-  document.getElementById("info").textContent = "初始化失败: " + err.message;
+  document.getElementById("info").textContent = t("info.init_failed", { msg: err.message });
 });

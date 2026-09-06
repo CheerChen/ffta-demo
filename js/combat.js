@@ -13,6 +13,7 @@ import { spawnProjectile } from "./projectile.js";
 import { updateStatusCard } from "./statusCard.js";
 import { worldFromTile, H_UNIT, TILE } from "./world.js";
 import { worldToScreen } from "./scene.js";
+import { t } from "../shared/i18n.js";
 
 // Facing direction from attacker to target (4-directional)
 function facingToward(from, to) {
@@ -90,7 +91,7 @@ export function performAttack(attacker, target, onAllDone) {
   });
 
   document.getElementById("info").textContent =
-    `${attacker.name} 攻击 ${target.name}！`;
+    t("log.attack", { a: attacker.name, b: target.name });
 
   // 2. Play attack animation; at hit frame, trigger target's hit + damage
   playOnce(attacker, "unarmed_atk", {
@@ -104,7 +105,7 @@ export function performAttack(attacker, target, onAllDone) {
           onDone: (t) => {
             trace({ type: "hit-done", target: t.name, hp: t.hp });
             document.getElementById("info").textContent =
-              `${t.name} 受击完毕。`;
+              t("log.hit_done", { name: t.name });
           },
         });
       }
@@ -113,7 +114,7 @@ export function performAttack(attacker, target, onAllDone) {
 
       // Update info
       document.getElementById("info").textContent =
-        `${attacker.name} 命中 ${target.name}！伤害 ${dmg}，HP ${target.hp}/${target.maxHp}`;
+        t("log.hit", { a: attacker.name, b: target.name, d: dmg, hp: target.hp, max: target.maxHp });
     },
     onDone: () => {
       // Restore facing, return to idle
@@ -157,7 +158,7 @@ export function performRangedAttack(attacker, target, onAllDone) {
   });
 
   document.getElementById("info").textContent =
-    `${attacker.name} 向 ${target.name} 扔雪球！`;
+    t("log.throw", { a: attacker.name, b: target.name });
 
   playOnce(attacker, "unarmed_atk", {
     hitFrame: THROW_RELEASE_FRAME,
@@ -179,7 +180,7 @@ export function performRangedAttack(attacker, target, onAllDone) {
               onDone: (t) => {
                 trace({ type: "hit-done", target: t.name, hp: t.hp });
                 document.getElementById("info").textContent =
-                  `${t.name} 受击完毕。`;
+                  t("log.hit_done", { name: t.name });
               },
             });
           }
@@ -187,7 +188,7 @@ export function performRangedAttack(attacker, target, onAllDone) {
           applyDamage(target, dmg, attacker);
 
           document.getElementById("info").textContent =
-            `${attacker.name} 命中 ${target.name}！伤害 ${dmg}，HP ${target.hp}/${target.maxHp}`;
+            t("log.hit", { a: attacker.name, b: target.name, d: dmg, hp: target.hp, max: target.maxHp });
         },
       });
     },

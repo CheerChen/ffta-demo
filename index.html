@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FFTA 立体学校 — 打雪仗</title>
+<title>FFTA DEMO</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: #8fc3ea; color: #e0e0e0; font-family: -apple-system, "PingFang SC", sans-serif; overflow: hidden; }
@@ -25,26 +25,26 @@
 <body>
 <div id="app">
   <div id="sidebar">
-    <h1>FFTA 立体学校 · 打雪仗</h1>
+    <h1>FFTA DEMO</h1>
 
-    <h2>操作</h2>
+    <h2 data-i18n="h.controls">操作</h2>
     <ul>
-      <li><span class="key-hint">Q</span> / <span class="key-hint">E</span> — 旋转视角（4 方向，平滑过渡）</li>
-      <li>点击单位 — 查看状态</li>
-      <li>点击蓝色 tile — 移动</li>
-      <li>点击敌方 — 攻击（近战或扔雪球）</li>
-      <li><span class="key-hint">B</span> — 切换学校贴图 / 白模型</li>
+      <li><span class="key-hint">Q</span> / <span class="key-hint">E</span> — <span data-i18n="ctrl.rotate">旋转视角（4 方向，平滑过渡）</span></li>
+      <li data-i18n="ctrl.unit">点击单位 — 查看状态</li>
+      <li data-i18n="ctrl.tile">点击蓝色 tile — 移动</li>
+      <li data-i18n="ctrl.enemy">点击敌方 — 攻击（近战或扔雪球）</li>
+      <li><span class="key-hint">B</span> — <span data-i18n="ctrl.toggle">切换学校贴图 / 白模型</span></li>
     </ul>
 
-    <h2>单位图例</h2>
+    <h2 data-i18n="h.legend">单位图例</h2>
     <ul>
-      <li><span style="color:#5a9dff">●</span> 玩家方: Marche / Lyle / Ritz</li>
-      <li><span style="color:#e0556a">●</span> 敌方: Colm / Guinness / Mewt</li>
+      <li><span style="color:#5a9dff">●</span> <span data-i18n="legend.player">玩家方: Marche / Lyle / Ritz</span></li>
+      <li><span style="color:#e0556a">●</span> <span data-i18n="legend.enemy">敌方: Colm / Guinness / Mewt</span></li>
     </ul>
 
-    <div id="info">初始化中…</div>
+    <div id="info" data-i18n="info.initializing">初始化中…</div>
 
-    <h2>回合顺序</h2>
+    <h2 data-i18n="h.turn_order">回合顺序</h2>
     <div id="turn-order"></div>
   </div>
 
@@ -55,9 +55,9 @@
     <div id="hud-bottom-right" style="position:absolute;z-index:15;display:flex;flex-direction:row;gap:8px;align-items:stretch;pointer-events:none;right:12px;bottom:12px;">
       <div id="action-menu-float" style="display:none;pointer-events:auto;background:rgba(15,52,96,0.92);border:1px solid #2a6aaa;border-radius:6px;padding:6px;box-shadow:0 4px 12px rgba(0,0,0,0.5);">
         <div style="display:flex;flex-direction:column;justify-content:space-between;gap:4px;min-width:80px;height:100%;">
-          <button id="act-move" style="padding:6px 12px;background:#1a4a7a;color:#cceeff;border:1px solid #2a6aaa;border-radius:3px;cursor:pointer;font-size:12px;text-align:left;">移动</button>
-          <button id="act-attack" style="padding:6px 12px;background:#4a1a2a;color:#ffcccc;border:1px solid #aa2a3a;border-radius:3px;cursor:pointer;font-size:12px;text-align:left;">攻击</button>
-          <button id="act-wait" style="padding:6px 12px;background:#2a2a3a;color:#cccccc;border:1px solid #555;border-radius:3px;cursor:pointer;font-size:12px;text-align:left;">等待</button>
+          <button id="act-move" data-i18n="btn.move" style="padding:6px 12px;background:#1a4a7a;color:#cceeff;border:1px solid #2a6aaa;border-radius:3px;cursor:pointer;font-size:12px;text-align:left;">移动</button>
+          <button id="act-attack" data-i18n="btn.attack" style="padding:6px 12px;background:#4a1a2a;color:#ffcccc;border:1px solid #aa2a3a;border-radius:3px;cursor:pointer;font-size:12px;text-align:left;">攻击</button>
+          <button id="act-wait" data-i18n="btn.wait" style="padding:6px 12px;background:#2a2a3a;color:#cccccc;border:1px solid #555;border-radius:3px;cursor:pointer;font-size:12px;text-align:left;">等待</button>
         </div>
       </div>
       <div id="status-card" style="display:none;pointer-events:auto;padding:8px;background:rgba(15,52,96,0.92);border:1px solid #2a6aaa;border-radius:6px;box-shadow:0 4px 12px rgba(0,0,0,0.5);width:220px;"></div>
@@ -67,15 +67,15 @@
     <div id="popup-layer" style="position:absolute;inset:0;pointer-events:none;z-index:20;"></div>
 
     <div id="battle-end" style="display:none;position:absolute;inset:0;background:rgba(10,10,26,0.85);flex-direction:column;align-items:center;justify-content:center;z-index:10;">
-      <div id="battle-end-title" style="font-size:36px;font-weight:bold;margin-bottom:12px;">胜利！</div>
-      <div id="battle-end-subtitle" style="font-size:14px;color:#a8b4c4;margin-bottom:24px;">敌方全灭。</div>
-      <button id="battle-restart" style="padding:10px 24px;background:#e94560;color:white;border:none;border-radius:6px;cursor:pointer;font-size:14px;">重新开始</button>
+      <div id="battle-end-title" style="font-size:36px;font-weight:bold;margin-bottom:12px;" data-i18n="end.victory">胜利！</div>
+      <div id="battle-end-subtitle" style="font-size:14px;color:#a8b4c4;margin-bottom:24px;" data-i18n="end.victory_sub">敌方全灭。</div>
+      <button id="battle-restart" style="padding:10px 24px;background:#e94560;color:white;border:none;border-radius:6px;cursor:pointer;font-size:14px;" data-i18n="end.restart">重新开始</button>
     </div>
   </div>
 </div>
 
 <script type="importmap">
-  { "imports": { "three": "./vendor/three.module.js" } }
+  { "imports": { "three": "./vendor/three.module.min.js" } }
 </script>
 <script type="module" src="./js/main.js"></script>
 </body>

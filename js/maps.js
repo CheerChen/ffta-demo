@@ -6,14 +6,16 @@ import {
   MAPS, currentMapId, MAP_DATA, grid, ROWS, COLS, currentTerrain,
   switchMap as _switchMap, getMapIds,
 } from "../shared/maps.js";
+import { t } from "../shared/i18n.js";
 
 // Re-export for demo modules that import from "./maps.js"
 export { currentMapId, MAP_DATA, grid, ROWS, COLS, currentTerrain, getMapIds };
 
-// Human-readable labels for known maps (optional; falls back to index)
-const MAP_LABELS = {
-  0: "map000 - 雪球战",
-  74: "map074 - 跳跃测试 (h2~8, max diff 2)",
+// Human-readable labels for known maps (optional; falls back to index).
+// Resolved at call time so the label follows the active i18n locale.
+const MAP_LABEL_KEYS = {
+  0: "map.0",
+  74: "map.74",
 };
 
 export let bgImagePath = getBgPath(currentMapId);
@@ -41,7 +43,7 @@ function getBgTopPath(id) {
 }
 
 export function getMapLabel(id) {
-  return MAP_LABELS[id] || `map${String(id).padStart(3, "0")}`;
+  return MAP_LABEL_KEYS[id] ? t(MAP_LABEL_KEYS[id]) : `map${String(id).padStart(3, "0")}`;
 }
 
 export function switchMap(id) {

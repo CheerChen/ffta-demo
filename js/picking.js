@@ -26,6 +26,7 @@ import { getUnitMeshes, getPlaneForUnit } from "./unitSprites.js";
 import { isCameraRotating } from "./cameraRig.js";
 import { TILE, H_UNIT, worldFromTile } from "./world.js";
 import { getSchoolMeshes, schoolTileFromHit, schoolHitIsProp } from "./school.js";
+import { t } from "../shared/i18n.js";
 
 let raycaster = null;
 let mouse = null;
@@ -57,7 +58,7 @@ export function initPicking() {
     setReachable(bfs.visited);
     rebuildHighlights(bfs.visited, active);
     document.getElementById("info").textContent =
-      active.name + " — 点击蓝色 tile 选择移动目标。";
+      t("hint.move", { name: active.name });
     render();
   });
   document.getElementById("act-attack").addEventListener("click", () => {
@@ -65,7 +66,7 @@ export function initPicking() {
     const active = getActiveUnit();
     if (!active) return;
     document.getElementById("info").textContent =
-      active.name + " — 点击敌人进行攻击（近战或扔雪球）。";
+      t("hint.attack", { name: active.name });
     setReachable(new Map());
     rebuildHighlights(null, active);
     render();
@@ -194,7 +195,7 @@ function handleUnitClick(unit) {
       return;
     } else {
       document.getElementById("info").textContent =
-        `${unit.name} 太远（距离 ${manhattan}），雪球射程 5。`;
+        t("hint.too_far", { name: unit.name, d: manhattan });
       return;
     }
   }
@@ -222,14 +223,14 @@ function handleTileClick(row, col) {
       setReachable(new Map());
       rebuildHighlights(null, active);
       document.getElementById("info").textContent =
-        active.name + " 移动中… 可继续攻击或点「等待」结束回合。";
+        t("hint.moving", { name: active.name });
       refreshActionMenuFloat(hasMoved(), hasActed());
       updateStatusCard(active);
       render();
       return;
     }
     document.getElementById("info").textContent =
-      active.name + " 的回合 — 点击蓝 tile 移动，点敌人攻击，或点「等待」结束。";
+      t("hint.turn", { name: active.name });
     return;
   }
 

@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { currentMapId } from "./maps.js";
 import { H_UNIT } from "./world.js";
 import { buildFences, clearFences, setFencesTextured } from "./fences.js";
+import { t } from "../shared/i18n.js";
 
 let mesh = null, textured = null, plain = null, model = null, outline = null;
 const clamp = new Map();
@@ -35,9 +36,9 @@ export async function buildSchool(scene) {
   clearSchool(scene);
   if (currentMapId !== 0) return;
   const response = await fetch(new URL("model.json", assetRoot));
-  if (!response.ok) throw new Error(`学校模型加载失败 (${response.status})`);
+  if (!response.ok) throw new Error(t("err.school_load", { status: response.status }));
   model = await response.json();
-  if (model.hUnit !== H_UNIT) throw new Error("学校模型与地图高度比例不同，请重新运行 tools/build_school.py");
+  if (model.hUnit !== H_UNIT) throw new Error(t("err.school_ratio"));
   const texture = await new THREE.TextureLoader().loadAsync(new URL("school_atlas.png", assetRoot).href);
   texture.magFilter = texture.minFilter = THREE.NearestFilter;
   texture.colorSpace = THREE.SRGBColorSpace;

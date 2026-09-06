@@ -45,7 +45,7 @@ export function loadAllSprites() {
 
 function loadStrip(dir, slot) {
   return new Promise((resolve) => {
-    const url = `sprites/${dir}/${slot}.png`;
+    const url = `sprites/${dir}/${slot}.webp`;
     const loader = new THREE.TextureLoader();
     loader.load(url, (tex) => {
       tex.magFilter = THREE.NearestFilter;

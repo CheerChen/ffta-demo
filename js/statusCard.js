@@ -13,6 +13,7 @@
 import { positionHUD } from "./render.js";
 import { getSpriteImage } from "./unitSprites.js";
 import { ROM_ANIM, TICK_MS, ANIM_SPEED, SPRITE_CELL, SPRITE_H } from "../shared/config.js";
+import { t, tList } from "../shared/i18n.js";
 
 // Portrait: the unit's own walk_front strip, looping at ROM timing, drawn into
 // a transparent canvas. Downed units hold frame 0 of their KO pose instead.
@@ -81,12 +82,12 @@ export function updateStatusCard(unit) {
   card.style.display = "block";
 
   const teamColor = unit.team === "player" ? "#5a9dff" : "#e0556a";
-  const teamLabel = unit.team === "player" ? "玩家方" : "敌方";
+  const teamLabel = unit.team === "player" ? t("card.team_player") : t("card.team_enemy");
   const hpPct = Math.max(0, (unit.hp / unit.maxHp) * 100);
   const ctPct = Math.min(100, (unit.ctCounter / 1000) * 100);
   const hpColor = hpPct > 50 ? "#4caf50" : hpPct > 25 ? "#ff9800" : "#f44336";
   const koLabel = unit.downed ? ' <span style="color:#888;">✕ KO</span>' : "";
-  const facingName = ["北", "东", "南", "西"][unit.facing];
+  const facingName = tList("facing.nesw")[unit.facing];
 
   card.innerHTML = `
     <div style="display:flex;gap:8px;align-items:stretch;height:100%;">
@@ -95,7 +96,7 @@ export function updateStatusCard(unit) {
       </div>
       <div style="flex:1;min-width:0;">
         <div style="font-size:13px;font-weight:bold;color:${teamColor};margin-bottom:2px;">${unit.name}${koLabel}</div>
-        <div style="font-size:10px;color:#8899aa;margin-bottom:4px;">${teamLabel} | 朝向 ${facingName}</div>
+        <div style="font-size:10px;color:#8899aa;margin-bottom:4px;">${teamLabel} | ${t("card.facing")} ${facingName}</div>
         <div style="margin-bottom:3px;">
           <div style="display:flex;justify-content:space-between;font-size:10px;color:#aabbcc;margin-bottom:1px;">
             <span>HP</span><span>${unit.hp}/${unit.maxHp}</span>
@@ -152,6 +153,6 @@ export function refreshActionMenuFloat(moved, acted) {
   if (!menu || menu.style.display === "none") return;
   const moveBtn = document.getElementById("act-move");
   const atkBtn = document.getElementById("act-attack");
-  if (moveBtn) { moveBtn.textContent = moved ? "已移动 ✓" : "移动"; moveBtn.disabled = moved; }
-  if (atkBtn) { atkBtn.textContent = acted ? "已行动 ✓" : "攻击"; atkBtn.disabled = acted; }
+  if (moveBtn) { moveBtn.textContent = moved ? t("btn.moved") : t("btn.move"); moveBtn.disabled = moved; }
+  if (atkBtn) { atkBtn.textContent = acted ? t("btn.acted") : t("btn.attack"); atkBtn.disabled = acted; }
 }
